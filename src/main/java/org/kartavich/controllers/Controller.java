@@ -1,7 +1,7 @@
-package org.kartavich.controller;
+package org.kartavich.controllers;
 
-import org.kartavich.domain.MyUser;
-import org.kartavich.repository.DataRepository;
+import org.kartavich.domain.UserEntities;
+import org.kartavich.repository.PriceRepository;
 import org.kartavich.repository.RoleRepository;
 import org.kartavich.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class MyController {
+public class Controller {
     @Autowired
-    DataRepository dataRepository;
+    PriceRepository priceRepository;
     @Autowired
     RoleRepository roleRepository;
     @Autowired
@@ -23,18 +23,18 @@ public class MyController {
 
     @GetMapping("/help")
     public String help() {
-        System.out.println("Hello");
-        return "hello";
+        System.out.println("For help contact (https://t.me/Kartavichhh)");
+        return "For help contact (https://t.me/Kartavichhh)";
     }
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("userForm", new MyUser());
+        model.addAttribute("userForm", new UserEntities());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") MyUser userForm, BindingResult bindingResult, Model model) {
+    public String addUser(@ModelAttribute("userForm") UserEntities userForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }

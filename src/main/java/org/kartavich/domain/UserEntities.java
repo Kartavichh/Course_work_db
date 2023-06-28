@@ -8,14 +8,14 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity @Table
-public class MyUser implements UserDetails {
+public class UserEntities implements UserDetails {
     @Id
     @GeneratedValue
     public Integer ID;
     public String username;
     public String password;
     @ManyToMany
-    public Set<MyRole> roles;
+    public Set<RolesEntities> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

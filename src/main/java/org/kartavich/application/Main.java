@@ -1,6 +1,6 @@
 package org.kartavich.application;
 
-import org.kartavich.controller.MyController;
+import org.kartavich.controllers.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 public class Main implements CommandLineRunner {
     @Autowired
-    MyController controller;
+    Controller controller;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

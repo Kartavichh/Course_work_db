@@ -4,16 +4,16 @@ import javax.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity @Table
-public class MyRole implements GrantedAuthority {
+public class RolesEntities implements GrantedAuthority {
     @Id @GeneratedValue
     public Integer ID;
     public String name;
 
-    public MyRole(String name) {
+    public RolesEntities(String name) {
         this.name = name;
     }
-    public MyRole() {
-    }
+//    public RolesEntities() {
+//    }
 
     @Override
     public String getAuthority() {

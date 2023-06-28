@@ -1,4 +1,4 @@
-package org.kartavich.controller;
+package org.kartavich.controllers;
 
 import org.kartavich.domain.*;
 import org.kartavich.repository.*;
@@ -27,22 +27,22 @@ public class UserService implements UserDetailsService {
     PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyUser user = userRepository.findByUsername(username);
+        UserEntities user = userRepository.findByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found");
         return user;
     }
-    public MyUser findUserById(Integer userId) {
-        Optional<MyUser> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new MyUser());
+    public UserEntities findUserById(Integer userId) {
+        Optional<UserEntities> userFromDb = userRepository.findById(userId);
+        return userFromDb.orElse(new UserEntities());
     }
 
-    public List<MyUser> allUsers() {
+    public List<UserEntities> allUsers() {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(MyUser user) {
-        MyUser userFromDB = userRepository.findByUsername(user.getUsername());
+    public boolean saveUser(UserEntities user) {
+        UserEntities userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null)
             return false;
         user.roles = Collections.singleton(roleRepository.findByName("USER"));
@@ -57,8 +57,8 @@ public class UserService implements UserDetailsService {
         }
         return false;
     }
-    public List<MyUser> usergtList(Integer idMin) {
-        return entityManager.createQuery("SELECT u FROM my_user u WHERE u.id > :paramId", MyUser.class)
+    public List<UserEntities> usergtList(Integer idMin) {
+        return entityManager.createQuery("SELECT u FROM my_user u WHERE u.id > :paramId", UserEntities.class)
                 .setParameter("paramId", idMin).getResultList();
     }
 }

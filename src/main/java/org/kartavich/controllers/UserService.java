@@ -40,9 +40,20 @@ public class UserService implements UserDetailsService {
         UserEntities userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null)
             return false;
-        user.roles = Collections.singleton(roleRepository.findByNameRole("ROLE_USER"));
+        user.roles = Collections.singleton(roleRepository.findByName("ROLE_USER"));
         user.password = (passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return true;
+    }
+    public boolean addRole(String username, String role){
+        UserEntities userFromDB = userRepository.findByUsername(username);
+        RolesEntities rolesEntities = roleRepository.findByName(role);
+        if (userFromDB == null || rolesEntities == null){
+            System.out.printf("False");
+            return false;
+        }
+        userFromDB.roles.add(rolesEntities);
+        System.out.printf("True");
         return true;
     }
 }

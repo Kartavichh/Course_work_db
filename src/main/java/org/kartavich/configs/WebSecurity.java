@@ -1,6 +1,6 @@
 package org.kartavich.configs;
 
-import org.kartavich.controllers.UserService;
+import org.kartavich.controllers.UserServiceController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public  class WebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserService userService;
+    UserServiceController userServiceController;
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(8);
@@ -48,6 +48,6 @@ public  class WebSecurity extends WebSecurityConfigurerAdapter {
     }
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(encoder());
+        auth.userDetailsService(userServiceController).passwordEncoder(encoder());
     }
 }

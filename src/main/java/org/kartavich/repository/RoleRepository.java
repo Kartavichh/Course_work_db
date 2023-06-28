@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository @Transactional
 public interface RoleRepository extends JpaRepository<RolesEntities, Integer> {
-    RolesEntities findByName(String name);
+    RolesEntities findByNameRole(String name);
 }

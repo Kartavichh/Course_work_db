@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class Controller {
+public class MainController {
     @Autowired
     PriceRepository priceRepository;
     @Autowired
@@ -19,7 +19,7 @@ public class Controller {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    UserService userService;
+    UserServiceController userServiceController;
 
     @GetMapping("/help")
     public String help() {
@@ -38,7 +38,7 @@ public class Controller {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (!userService.saveUser(userForm)){
+        if (!userServiceController.saveUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
@@ -47,7 +47,7 @@ public class Controller {
     @GetMapping("/admin")
     @Secured("ADMIN")
     public String userList(Model model) {
-        model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("allUsers", userServiceController.allUsers());
         return "admin";
     }
     @PostMapping("/admin")
@@ -55,13 +55,13 @@ public class Controller {
                               @RequestParam(required = true, defaultValue = "" ) String action,
                               Model model) {
         if (action.equals("delete")){
-            userService.deleteUser(userId);
+            userServiceController.deleteUser(userId);
         }
         return "redirect:/admin";
     }
     @GetMapping("/admin/gt/{userId}")
     public String  gtUser(@PathVariable("userId") Integer userId, Model model) {
-        model.addAttribute("allUsers", userService.usergtList(userId));
+        model.addAttribute("allUsers", userServiceController.usergtList(userId));
         return "admin";
     }
 }

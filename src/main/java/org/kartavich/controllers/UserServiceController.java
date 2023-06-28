@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceController implements UserDetailsService {
     @PersistenceContext
     EntityManager entityManager;
     @Autowired
@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntities user = userRepository.findByUsername(username);
         if (user == null)
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found, make sure what user exist");
         return user;
     }
     public UserEntities findUserById(Integer userId) {
@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
         UserEntities userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null)
             return false;
-        user.roles = Collections.singleton(roleRepository.findByName("USER"));
+        user.roles = Collections.singleton(roleRepository.findByNameRole("USER"));
         user.password = (passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

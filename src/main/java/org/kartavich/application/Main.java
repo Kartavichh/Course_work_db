@@ -1,6 +1,6 @@
 package org.kartavich.application;
 
-import org.kartavich.controllers.Controller;
+import org.kartavich.controllers.MainController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 public class Main implements CommandLineRunner {
     @Autowired
-    Controller controller;
+    MainController mainController;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -25,8 +25,6 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-        System.out.println("Hello");
-        System.out.println(controller.help());
-        // System.exit(0);
+        System.out.println("Server is done");
     }
 }

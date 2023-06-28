@@ -17,6 +17,14 @@ public class UserEntities implements UserDetails {
     @ManyToMany
     public Set<RolesEntities> roles;
 
+    public UserEntities(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public UserEntities() {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

@@ -9,4 +9,10 @@ public class IphonesEntities {
     public String nameOfModel;
     public Float prise;
 
+    public IphonesEntities(Float prise, String nameOfModel) {
+        this.prise = prise;
+    }
+    public IphonesEntities() {
+
+    }
 }

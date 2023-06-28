@@ -16,15 +16,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceController implements UserDetailsService {
-    @PersistenceContext
-    EntityManager entityManager;
+public class UserService implements UserDetailsService {
     @Autowired
     RoleRepository roleRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+//    Переопределение метода из UserDetailsService (обязательно), проверяем есть ли такой ник для авторизации
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntities user = userRepository.findByUsername(username);
@@ -32,33 +31,18 @@ public class UserServiceController implements UserDetailsService {
             throw new UsernameNotFoundException("User not found, make sure what user exist");
         return user;
     }
-    public UserEntities findUserById(Integer userId) {
-        Optional<UserEntities> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new UserEntities());
-    }
-
+//    Реализация GetAll
     public List<UserEntities> allUsers() {
         return userRepository.findAll();
     }
-
+//    Сохранение юзера в репозиторий, проверка существует ли такой юзер, если есть, выдаст ошибку
     public boolean saveUser(UserEntities user) {
         UserEntities userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null)
             return false;
-        user.roles = Collections.singleton(roleRepository.findByNameRole("USER"));
+        user.roles = Collections.singleton(roleRepository.findByNameRole("ROLE_USER"));
         user.password = (passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
-    }
-    public boolean deleteUser(Integer userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
-    }
-    public List<UserEntities> usergtList(Integer idMin) {
-        return entityManager.createQuery("SELECT u FROM my_user u WHERE u.id > :paramId", UserEntities.class)
-                .setParameter("paramId", idMin).getResultList();
     }
 }

@@ -22,7 +22,7 @@ public class Main implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-
+// Метод запускаемый при старте сервера
     @Override
     public void run(String... args){
         System.out.println("Server is done");

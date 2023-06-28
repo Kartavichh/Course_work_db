@@ -12,8 +12,8 @@ public class RolesEntities implements GrantedAuthority {
     public RolesEntities(String name) {
         this.name = name;
     }
-//    public RolesEntities() {
-//    }
+    public RolesEntities() {
+   }
 
     @Override
     public String getAuthority() {

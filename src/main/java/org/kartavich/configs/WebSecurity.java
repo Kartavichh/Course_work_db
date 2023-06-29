@@ -19,7 +19,7 @@ public  class WebSecurity extends WebSecurityConfigurerAdapter {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(8);
     }
-
+// Всё доступно всем
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity

@@ -15,6 +15,6 @@ public interface RoleRepository extends JpaRepository<RolesEntities, Integer> {
     void addRoleSQL(Integer userId, Integer roleId);
 
     @Modifying
-    @Query(value = "DELETE FROM user_entities_roles AS VALUES (:userId, :roleId)", nativeQuery = true)
+    @Query(value = "DELETE FROM user_entities_roles WHERE user_entities_id = :userId AND roles_id = :roleId", nativeQuery = true)
     void dellRoleSQL(Integer userId, Integer roleId);
 }

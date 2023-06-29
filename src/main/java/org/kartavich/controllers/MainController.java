@@ -93,12 +93,20 @@ public class MainController {
         }
         return new SourcePack<>(null, "User wasn't found");
     }
-    @PostMapping("/addSellerStatus")
+    @PostMapping("/addRole")
     @Secured("ROLE_ADMIN")
-    public SourcePack<String> addSellerStatus(@RequestParam("name") String username, @RequestParam("role") String role) {
+    public SourcePack<String> addRole(@RequestParam("name") String username, @RequestParam("role") String role) {
         if (!userService.addRole(username, role)){
             return new SourcePack<>(null, "User name not found");
         }
         return new SourcePack<>("Role add");
+    }
+    @PostMapping("/dellRole")
+    @Secured("ROLE_ADMIN")
+    public SourcePack<String> dellRole(@RequestParam("name") String username, @RequestParam("role") String role) {
+        if (!userService.deleteRole(username, role)){
+            return new SourcePack<>(null, "User name not found");
+        }
+        return new SourcePack<>("Role was delete");
     }
 }

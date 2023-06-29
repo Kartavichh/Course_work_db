@@ -52,7 +52,19 @@ public class UserService implements UserDetailsService {
             System.out.printf("False");
             return false;
         }
-        userFromDB.roles.add(rolesEntities);
+       roleRepository.addRoleSQL(userFromDB.ID, rolesEntities.ID);
+        System.out.printf("True");
+        return true;
+    }
+
+    public boolean deleteRole(String username, String role){
+        UserEntities userFromDB = userRepository.findByUsername(username);
+        RolesEntities rolesEntities = roleRepository.findByName(role);
+        if (userFromDB == null || rolesEntities == null){
+            System.out.printf("False");
+            return false;
+        }
+        roleRepository.dellRoleSQL(userFromDB.ID, rolesEntities.ID);
         System.out.printf("True");
         return true;
     }

@@ -1,0 +1,11 @@
+org/kartavich/repository/RoleRepository.class
+org/kartavich/repository/UserRepository.class
+org/kartavich/domain/RolesEntities.class
+org/kartavich/controllers/UserService.class
+org/kartavich/application/Main.class
+org/kartavich/configs/WebSecurity.class
+org/kartavich/controllers/SourcePack.class
+org/kartavich/repository/PriceRepository.class
+org/kartavich/domain/UserEntities.class
+org/kartavich/domain/IphonesEntities.class
+org/kartavich/controllers/MainController.class

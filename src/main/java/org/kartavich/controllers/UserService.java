@@ -49,11 +49,9 @@ public class UserService implements UserDetailsService {
         UserEntities userFromDB = userRepository.findByUsername(username);
         RolesEntities rolesEntities = roleRepository.findByName(role);
         if (userFromDB == null || rolesEntities == null){
-            System.out.printf("False");
             return false;
         }
        roleRepository.addRoleSQL(userFromDB.ID, rolesEntities.ID);
-        System.out.printf("True");
         return true;
     }
 

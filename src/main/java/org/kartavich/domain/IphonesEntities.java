@@ -11,6 +11,7 @@ public class IphonesEntities {
 
     public IphonesEntities(Float prise, String nameOfModel) {
         this.prise = prise;
+        this.nameOfModel = nameOfModel;
     }
     public IphonesEntities() {
 

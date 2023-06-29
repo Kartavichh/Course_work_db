@@ -8,7 +8,6 @@ import org.kartavich.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -50,15 +49,12 @@ public class MainController {
             priceRepository.deleteById(id);
             return new SourcePack<>("Lot was deleted");
         }
-        return new SourcePack<>(null, "Id isn't found");
+        return new SourcePack<>(null, "ID isn't found");
     }
 
     @GetMapping("/lot/get")
     @Secured("ROLE_USER")
     public SourcePack<List<IphonesEntities>> getLot(@RequestParam("id") Integer id) {
-        if(id == 0) {
-            return new SourcePack<List<IphonesEntities>>(priceRepository.findAll());
-        }
         return new SourcePack<>(priceRepository.findAllById(Collections.singleton(id)));
     }
 //    Получение всех моделей смартфонов

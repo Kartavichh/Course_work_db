@@ -45,7 +45,7 @@ public class MainController {
     @PostMapping("/lot/delete")
     @Secured("ROLE_SELLER")
     public SourcePack<String> deleteLot(@RequestParam("id") Integer id) {
-        if(userRepository.findById(id).isPresent()) {
+        if(priceRepository.findById(id).isPresent()) {
             priceRepository.deleteById(id);
             return new SourcePack<>("Lot was deleted");
         }
